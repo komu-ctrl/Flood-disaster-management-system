@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Flood Alerts</h2>
+
+{% for alert in alerts %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h5>{{ alert.location }}</h5>
+        <p>{{ alert.message }}</p>
+        <p><strong>Risk:</strong> {{ alert.risk_level }}</p>
+    
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
