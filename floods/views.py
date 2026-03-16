@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
+from .models import FloodAlert
 
 
 def home(request):
@@ -23,3 +24,8 @@ def register(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
+
+
+def alerts(requests):
+    alerts = FloodAlert.objects.all().order_by('-created_at')
+    return render( request, "alerts.html", {"alerts":alerts})
