@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Relief Application Form</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Disaster Relief Application Form</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <label for="full_name">Full Name</label>
+        <input type="text" id="full_name" name="full_name" placeholder="Your full name" required>
+
+        <!-- Email -->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+        <!-- Phone Number -->
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+254 700 000000" required>
+
+        <!-- Location -->
+        <label for="{{ form.location.id_for_label }}">Location</label>
+        {{ form.location }}
+
+        <!-- Damage Description -->
+        <label for="{{ form.damage_description.id_for_label }}">Damage Description</label>
+        {{ form.damage_description }}
+
+        <!-- People Affected -->
+        <label for="{{ form.people_affected.id_for_label }}">Number of People Affected</label>
+        {{ form.people_affected }}
+
+        <!-- Emergency Contact -->
+        <label for="emergency_contact">Emergency Contact (Relative/Friend)</label>
+        <input type="tel" id="emergency_contact" name="emergency_contact" placeholder="+254 700 000000">
+
+        <!-- Additional Notes -->
+        <label for="notes">Additional Notes / Special Needs</label>
+        <textarea id="notes" name="notes" placeholder="Any other information that can help the relief team"></textarea>
+
+        <button type="submit">Submit Application</button>
+    </form>
+
+</div>
+
+</body>
+</html>
