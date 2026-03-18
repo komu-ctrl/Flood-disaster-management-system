@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flood Relief Donation | Support Flood Victims in Kenya</title>
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <div class="container">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span>🚨 EMERGENCY APPEAL: Thousands affected by severe flooding in Kenya. Your donation can save lives today.</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="content-left">
+                    <div class="badge-container">
+                        <span class="badge">🇰🇪 KENYA FLOOD RELIEF</span>
+                        <span class="urgent-badge">URGENT</span>
+                    </div>
+                    
+                    <h1>Help Families <span class="highlight">Displaced by Floods</span> Rebuild Their Lives</h1>
+                    
+                    <p class="hero-description">
+                        Heavy rains have caused devastating floods across multiple counties in Kenya. 
+                        Thousands of families have lost their homes, livelihoods, and access to basic necessities. 
+                        They need your help now more than ever.
+                    </p>
+
+                    <!-- Impact Counter -->
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <div class="impact-number">10,000+</div>
+                            <div class="impact-label">People Displaced</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">15</div>
+                            <div class="impact-label">Counties Affected</div>
+                        </div>
+                        <div class="impact-item">
+                            <div class="impact-number">24/7</div>
+                            <div class="impact-label">Relief Operations</div>
+                        </div>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verified by Red Cross</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>M-PESA Secure</span>
+                        </div>
+                        <div class="trust-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>100% Goes to Victims</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Donation Card -->
+                <div class="donation-card" id="donationCard">
+                    <div class="card-header">
+                        <h2>Make a Donation</h2>
+                        <p>Your support provides immediate relief</p>
+                    </div>
+                    
+                    <form id="donationForm">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="donorName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="donorName" name="donorName" required placeholder="John Doe">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="donorEmail">Email Address <span class="required">*</span></label>
+                                <input type="email" id="donorEmail" name="donorEmail" required placeholder="john@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="donorPhone">M-PESA Phone <span class="required">*</span></label>
+                                <input type="tel" id="donorPhone" name="donorPhone" required placeholder="254700000000" value="254">
+                                <small class="hint">Enter your M-PESA registered number</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Amount Selection -->
+                        <div class="form-group">
+                            <label>Donation Amount (KES) <span class="required">*</span></label>
+                            <div class="amount-buttons">
+                                <button type="button" class="amount-btn" data-amount="200">200</button>
+                                <button type="button" class="amount-btn" data-amount="500">500</button>
+                                <button type="button" class="amount-btn" data-amount="1000">1,000</button>
+                                <button type="button" class="amount-btn" data-amount="2000">2,000</button>
+                                <button type="button" class="amount-btn" data-amount="5000">5,000</button>
+                            </div>
+                            
+                            <div class="custom-amount">
+                                <input type="number" id="customAmount" placeholder="Or enter custom amount (min 10 KES)">
+                            </div>
+                        </div>
+                        
+                        <!-- What Your Donation Covers -->
+                        <div class="donation-breakdown">
+                            <p class="breakdown-title"><i class="fas fa-heart"></i> What your donation provides:</p>
+                            <div class="breakdown-items">
+                                <div class="breakdown-item">
+                                    <span class="amount-example">KES 500</span>
+                                    <span class="amount-desc">Food for a family for 3 days</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="amount-example">KES 1,000</span>
+                                    <span class="amount-desc">Emergency shelter kit</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="amount-example">KES 2,000</span>
+                                    <span class="amount-desc">Medical supplies + food</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message of Support (Optional)</label>
+                            <textarea id="message" name="message" rows="2" placeholder="Leave a message for the flood victims..."></textarea>
+                        </div>
+                        
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="isAnonymous" name="isAnonymous">
+                            <label for="isAnonymous">Donate anonymously</label>
+                        </div>
+                        
+                        <!-- M-PESA Payment Section -->
+                        <div class="mpesa-section">
+                            <div class="mpesa-header">
+                                <i class="fab fa-cc-mpesa"></i>
+                                <span>Pay with M-PESA</span>
+                            </div>
+                            <div class="mpesa-steps">
+                                <div class="step">
+                                    <span class="step-number">1</span>
+                                    <span>Enter M-PESA number</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">2</span>
+                                    <span>Check phone for STK prompt</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">3</span>
+                                    <span>Enter PIN to complete</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="donate-btn" id="donateBtn">
+                            <span>Donate with M-PESA</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <div class="secure-badge">
+                            <i class="fas fa-lock"></i>
+                            <span>Secured by M-PESA • 256-bit SSL Encryption</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Live Donation Feed -->
+            <div class="live-feed">
+                <div class="feed-header">
+                    <i class="fas fa-bell"></i>
+                    <h3>Live Donation Feed</h3>
+                    <span class="live-badge">LIVE</span>
+                </div>
+                <div class="feed-container" id="liveFeed">
+                    <!-- Donations will be populated here via JS -->
+                </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="how-it-works">
+                <h2>How Your Donation Helps</h2>
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-icon emergency">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Emergency Food</h3>
+                        <p>Provides nutritious meals for displaced families</p>
+                        <div class="step-impact">KES 500 feeds a family for 3 days</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon shelter">
+                            <i class="fas fa-tent"></i>
+                        </div>
+                        <h3>Shelter Kits</h3>
+                        <p>Temporary shelter materials and blankets</p>
+                        <div class="step-impact">KES 1,000 provides emergency shelter</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon medical">
+                            <i class="fas fa-kit-medical"></i>
+                        </div>
+                        <h3>Medical Aid</h3>
+                        <p>First aid kits and essential medicine</p>
+                        <div class="step-impact">KES 2,000 covers medical needs</div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon water">
+                            <i class="fas fa-droplet"></i>
+                        </div>
+                        <h3>Clean Water</h3>
+                        <p>Safe drinking water and purification tablets</p>
+                        <div class="step-impact">KES 500 provides clean water</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partners Section -->
+            <div class="partners">
+                <p>Trusted by leading organizations</p>
+                <div class="partner-logos">
+                    <div class="partner">
+                        <i class="fas fa-hand-holding-heart"></i>
+                        <span>Kenya Red Cross</span>
+                    </div>
+                    <div class="partner">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Safaricom</span>
+                    </div>
+                    <div class="partner">
+                        <i class="fas fa-building"></i>
+                        <span>UNICEF Kenya</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Page Template (Hidden by default) -->
+    <div id="successPage" style="display: none;">
+        <div class="success-container">
+            <div class="success-card">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Thank You for Your Donation!</h1>
+                <p>Your generosity will help flood victims rebuild their lives.</p>
+                
+                <div class="donation-details" id="donationDetails">
+                    <!-- Populated via JS -->
+                </div>
+                
+                <div class="success-actions">
+                    <button onclick="window.print()" class="print-btn">
+                        <i class="fas fa-print"></i> Print Receipt
+                    </button>
+                    <a href="/" class="home-btn">
+                        <i class="fas fa-home"></i> Return Home
+                    </a>
+                </div>
+                
+                <div class="share-section">
+                    <p>Share to inspire others:</p>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-btn facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notificationContainer"></div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

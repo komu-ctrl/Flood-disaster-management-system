@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Confirmation | Flood Relief Kenya</title>
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="success-container">
+                <div class="success-card">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    
+                    <h1>Thank You for Your Donation!</h1>
+                    <p class="success-subtitle">Your generosity will help flood victims rebuild their lives.</p>
+                    
+                    <div class="donation-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Transaction ID:</span>
+                            <span class="detail-value">{{ donation.transaction_id }}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Amount Donated:</span>
+                            <span class="detail-value"><strong>KES {{ donation.amount }}</strong></span>
+                        </div>
+                        {% if donation.mpesa_receipt_number %}
+                        <div class="detail-row">
+                            <span class="detail-label">M-PESA Receipt:</span>
+                            <span class="detail-value">{{ donation.mpesa_receipt_number }}</span>
+                        </div>
+                        {% endif %}
+                        <div class="detail-row">
+                            <span class="detail-label">Status:</span>
+                            <span class="detail-value status-{{ donation.status|lower }}">
+                                <i class="fas fa-check-circle"></i> {{ donation.get_status_display }}
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Donation Date:</span>
+                            <span class="detail-value">{{ donation.created_at|date:"M d, Y H:i" }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Impact Message -->
+                    <div class="impact-message">
+                        <h3>What Your Donation Provides</h3>
+                        {% if donation.amount >= 5000 %}
+                            <p><strong>KES 5,000+:</strong> Provides complete emergency relief package including food, shelter, medical supplies, and clean water for 20+ people.</p>
+                        {% elif donation.amount >= 2000 %}
+                            <p><strong>KES 2,000:</strong> Covers medical supplies, emergency food, and shelter materials for 5 families.</p>
+                        {% elif donation.amount >= 1000 %}
+                            <p><strong>KES 1,000:</strong> Provides emergency shelter kit and food supplies for 3 days.</p>
+                        {% elif donation.amount >= 500 %}
+                            <p><strong>KES 500:</strong> Feeds a family for 3 days or provides emergency shelter materials.</p>
+                        {% else %}
+                            <p>Your donation of KES {{ donation.amount }} will be combined with others to provide vital relief supplies.</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Donor Information -->
+                    {% if not donation.is_anonymous %}
+                    <div class="donor-info">
+                        <h3>We've Recorded Your Details</h3>
+                        <div class="donor-details">
+                            <p><strong>Name:</strong> {{ donation.donor_name }}</p>
+                            <p><strong>Email:</strong> {{ donation.donor_email }}</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="donor-info">
+                        <p><em><i class="fas fa-mask"></i> You donated anonymously</em></p>
+                    </div>
+                    {% endif %}
+
+                    <!-- Action Buttons -->
+                    <div class="success-actions">
+                        <button onclick="window.print()" class="print-btn">
+                            <i class="fas fa-print"></i> Print Receipt
+                        </button>
+                        <a href="/" class="home-btn">
+                            <i class="fas fa-home"></i> Return Home
+                        </a>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section">
+                        <p>Help us reach more people. Share this cause:</p>
+                        <div class="share-buttons">
+                            <a href="https://twitter.com/intent/tweet?text=I%20just%20donated%20to%20Kenya%20Flood%20Relief!%20Help%20us%20support%20flood%20victims." target="_blank" class="share-btn twitter">
+                                <i class="fab fa-twitter"></i> Twitter
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=your-domain.com" target="_blank" class="share-btn facebook">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                            <a href="https://wa.me/?text=I%20just%20donated%20to%20Kenya%20Flood%20Relief!%20Help%20us%20support%20flood%20victims." target="_blank" class="share-btn whatsapp">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Confidence Message -->
+                    <div class="confidence-section">
+                        <p><i class="fas fa-shield-alt"></i> Your transaction is secure and has been verified by M-PESA. You will receive an SMS confirmation shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
