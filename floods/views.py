@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
+add-alert-feature
+from .models import FloodAlert
+
 from .forms import ReliefForm
+ main
 
 def home(request):
     return render(request, 'home.html')
@@ -24,6 +28,11 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
+
+add-alert-feature
+def alerts(requests):
+    alerts = FloodAlert.objects.all().order_by('-created_at')
+    return render( request, "alerts.html", {"alerts":alerts})
 
 add-donation-feature
 from django.shortcuts import render, redirect, get_object_or_404
@@ -220,4 +229,5 @@ def apply_relief(request):
         form = ReliefForm()
 
     return render(request, "apply.html", {'form': form})
+ main
  main

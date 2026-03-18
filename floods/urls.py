@@ -5,6 +5,9 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('register/', views.register, name="register"),
     path('logout/', views.logout_user, name="logout"),
+ add-alert-feature
+    path('alerts/', views.alerts, name="alerts"),
+
     add-donation-feature
 ]
 
@@ -21,4 +24,5 @@ urlpatterns = [
     path('api/donation-stats/', views.get_donation_stats, name='donation_stats'),
     path('apply/', views.apply_relief, name='apply_relief'),
    
+ main
 ]

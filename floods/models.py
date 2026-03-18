@@ -3,6 +3,17 @@ from django.contrib.auth.models import User
 
  add-donation-feature
 # Create your models here.
+ add-alert-feature
+class FloodAlert(models.Model):
+    location = models.CharField(max_length=200)
+    risk_level = models.CharField(max_length=50)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.location
+
 from django.db import models
 from django.utils import timezone
 import uuid
@@ -81,7 +92,7 @@ class MpesaTransaction(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-=======
+
 class ReliefApplication(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100)
@@ -96,4 +107,5 @@ class ReliefApplication(models.Model):
 
     def __str__(self):
         return self.full_name
+ main
  main
