@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('register/', views.register, name="register"),
     path('logout/', views.logout_user, name="logout"),
+    add-donation-feature
 ]
 
 app_name = 'donations'
@@ -18,4 +19,6 @@ urlpatterns = [
     path('api/initiate-payment/', views.initiate_payment, name='initiate_payment'),
     path('api/mpesa-callback/', views.mpesa_callback, name='mpesa_callback'),
     path('api/donation-stats/', views.get_donation_stats, name='donation_stats'),
+    path('apply/', views.apply_relief, name='apply_relief'),
+   
 ]

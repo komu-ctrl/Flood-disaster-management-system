@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
-
+from .forms import ReliefForm
 
 def home(request):
     return render(request, 'home.html')
@@ -25,6 +25,7 @@ def logout_user(request):
     return redirect('home')
 
 
+add-donation-feature
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -203,3 +204,20 @@ def get_donation_stats(request):
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
     
     return JsonResponse({'error': 'Invalid method'}, status=405)
+
+def apply_relief(request):
+
+    if request.method == 'POST':
+        form = ReliefForm(request.POST)
+
+        if form.is_valid():
+            relief = form.save(commit=False)
+            relief.user = request.user
+            relief.save()
+            return redirect('home')
+
+    else:
+        form = ReliefForm()
+
+    return render(request, "apply.html", {'form': form})
+ main
